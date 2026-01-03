@@ -1,0 +1,140 @@
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-XXXXXXXXXX", {
+    page_path: window.location.pathname,
+    anonymize_ip: true,
+  });
+</script>
+
+<!-- Yandex.Metrica (Important for Iran) -->
+<script type="text/javascript">
+  (function (m, e, t, r, i, k, a) {
+    m[i] =
+      m[i] ||
+      function () {
+        (m[i].a = m[i].a || []).push(arguments);
+      };
+    m[i].l = 1 * new Date();
+    for (var j = 0; j < document.scripts.length; j++) {
+      if (document.scripts[j].src === r) {
+        return;
+      }
+    }
+    (k = e.createElement(t)),
+      (a = e.getElementsByTagName(t)[0]),
+      (k.async = 1),
+      (k.src = r),
+      a.parentNode.insertBefore(k, a);
+  })(window, document, "script", "https://mc.yandex.ru/metrica/tag.js", "ym");
+
+  ym(XXXXXXXXXX, "init", {
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true,
+  });
+</script>
+<noscript
+  ><div>
+    <img
+      src="https://mc.yandex.ru/watch/XXXXXXXXXX"
+      style="position: absolute; left: -9999px"
+      alt=""
+    /></div
+></noscript>
+
+<!-- Schema.org - Breadcrumb Navigation -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "خانه",
+        "item": "https://totak.ir/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "بازی‌ها",
+        "item": "https://totak.ir/#games"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "سانس‌ها",
+        "item": "https://totak.ir/#sessions"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "گالری",
+        "item": "https://totak.ir/#videos"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "درباره ما",
+        "item": "https://totak.ir/#about"
+      }
+    ]
+  }
+</script>
+
+<!-- Organization Schema -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "شهربازی توتک یزد",
+    "url": "https://totak.ir",
+    "logo": "https://totak.ir/logo.png",
+    "sameAs": [
+      "https://www.instagram.com/totak.ir",
+      "https://www.facebook.com/totak.ir"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "telephone": "+98935xxxx",
+      "email": "info@totak.ir"
+    }
+  }
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "شهربازی توتک چه بازی‌هایی دارد؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "شهربازی توتک دارای 8 بازی متنوع و هیجان‌انگیز است شامل: ادونچر، تارزان‌نوردی، صخره‌نوردی، برج‌نوردی، هی‌دی، خانه رنگی، واقعیت مجازی و ماشین‌های کوبنده"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ساعات کاری شهربازی توتک چگونه است؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "شهربازی توتک از ساعت 9 صبح تا 9 شب باز است. هفته: شنبه تا پنجشنبه"
+        }
+      }
+    ]
+  }
+</script>

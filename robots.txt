@@ -1,0 +1,35 @@
+# robots.txt for Totak Amusement Park Website
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+Allow: /*.html
+Allow: /index.html
+Disallow: /admin/
+Disallow: /*.php
+Disallow: /*?*
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.pdf$
+Disallow: /cgi-bin/
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex (Popular in Iran/Russia)
+User-agent: Yandex
+Allow: /
+Crawl-delay: 0
+
+# Sitemap Location
+Sitemap: https://totak.ir/sitemap.xml
+
+# Cache settings
+Request-rate: 1 request per 1 second
