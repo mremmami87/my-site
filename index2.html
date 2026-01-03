@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="وب‌سایت شخصی و نمونه‌کارهای حرفه‌ای - توسعه‌دهنده ارشد فرانت‌اند">
+    <meta name="theme-color" content="#0f172a">
+    <title>علی محمدی | توسعه‌دهنده ارشد فرانت‌اند</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Vazirmatn Font for Persian -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent: #22d3ee;
+            --bg-light: #ffffff;
+            --bg-dark: #0f172a;
+            --surface-light: #f8fafc;
+            --surface-dark: #1e293b;
+            --text-light: #0f172a;
+            --text-dark: #f8fafc;
+            --text-muted-light: #64748b;
+            --text-muted-dark: #94a3b8;
+        }
+        
+        /* Theme Classes */
+        .theme-light {
+            --bg: var(--bg-light);
+            --surface: var(--surface-light);
+            --text: var(--text-light);
+            --text-muted: var(--text-muted-light);
+        }
+        
+        .theme-dark {
+            --bg: var(--bg-dark);
+            --surface: var(--surface-dark);
+            --text: var(--text-dark);
+            --text-muted: var(--text-muted-dark);
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-delay-100 { transition-delay: 0.1s; }
+        .animate-delay-200 { transition-delay: 0.2s; }
+        .animate-delay-300 { transition-delay: 0.3s; }
+        .animate-delay-400 { transition-delay: 0.4s; }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #6366f1, #8b5cf6, #22d3ee, #6366f1);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .theme-dark .glass-effect {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-light .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        .skill-bar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Hero Decoration */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid var(--bg);
+        }
+        
+        .timeline-line {
+            position: absolute;
+            right: -1px;
+            top: 20px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+        }
+    </style>
+</head>
+<body class="theme-dark antialiased">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#hero" class="text-2xl font-bold gradient-text">علی.م</a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#hero" class="nav-link text-sm font-medium hover:text-[var(--primary)] transition-colors">خانه</a>
+                    <a href="#about" class="nav-link text-sm font-medium hover:text-[var(--primary)] transition-colors">درباره من</a>
+                    <a href="#skills" class="nav-link text-sm font-medium hover:text-[var(--primary)] transition-colors">مهارت‌ها</a>
+                    <a href="#projects" class="nav-link text-sm font-medium hover:text-[var(--primary)] transition-colors">نمونه‌کارها</a>
+                    <a href="#resume" class="nav-link text-sm font-medium hover:text-[var(--primary)] transition-colors">رزومه</a>
+                    <a href="#contact" class="nav-link text-sm font-medium hover:text-[var(--primary)] transition-colors">تماس</a>
+                </div>
+                
+                <!-- Theme Toggle & Mobile Menu -->
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--surface)] transition-colors" aria-label="تغییر تم">
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark-icon"></i>
+                        <i data-lucide="moon" class="w-5 h-5 light-icon"></i>
+                    </button>
+                    
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-[var(--surface)] transition-colors" aria-label="منو">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#hero" class="block py-2 text-center font-medium hover:text-[var(--primary)]">خانه</a>
+                <a href="#about" class="block py-2 text-center font-medium hover:text-[var(--primary)]">درباره من</a>
+                <a href="#skills" class="block py-2 text-center font-medium hover:text-[var(--primary)]">مهارت‌ها</a>
+                <a href="#projects" class="block py-2 text-center font-medium hover:text-[var(--primary)]">نمونه‌کارها</a>
+                <a href="#resume" class="block py-2 text-center font-medium hover:text-[var(--primary)]">رزومه</a>
+                <a href="#contact" class="block py-2 text-center font-medium hover:text-[var(--primary)]">تماس</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Background Blobs -->
+        <div class="hero-blob w-96 h-96 bg-indigo-500 -top-20 -right-20"></div>
+        <div class="hero-blob w-80 h-80 bg-cyan-500 bottom-20 -left-20"></div>
+        <div class="hero-blob w-64 h-64 bg-purple-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-y-8">
+                <!-- Profile Image -->
+                <div class="animate-on-scroll float-animation mx-auto w-40 h-40 rounded-full gradient-bg p-1">
+                    <div class="w-full h-full rounded-full bg-[var(--surface)] flex items-center justify-center">
+                        <span class="text-5xl font-bold gradient-text">ع.م</span>
+                    </div>
+                </div>
+                
+                <!-- Name & Title -->
+                <div class="animate-on-scroll animate-delay-100">
+                    <p class="text-[var(--primary)] font-medium mb-2">سلام، من هستم</p>
+                    <h1 class="text-5xl md:text-7xl font-black mb-4">
+                        <span class="gradient-text">علی محمدی</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-[var(--text-muted)]">توسعه‌دهنده ارشد فرانت‌اند</p>
+                </div>
+                
+                <!-- Introduction -->
+                <p class="animate-on-scroll animate-delay-200 max-w-2xl mx-auto text-lg text-[var(--text-muted)] leading-relaxed">
+                    متخصص در طراحی و توسعه رابط‌های کاربری پیشرفته با تمرکز بر تجربه کاربری استثنایی، 
+                    عملکرد بهینه و معماری مقیاس‌پذیر. بیش از ۸ سال تجربه در پروژه‌های سازمانی و استارتاپ‌ها.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="animate-on-scroll animate-delay-300 flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="btn-primary px-8 py-4 rounded-xl text-white font-semibold flex items-center justify-center gap-2">
+                        <span>مشاهده نمونه‌کارها</span>
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#contact" class="px-8 py-4 rounded-xl border-2 border-[var(--primary)] text-[var(--primary)] font-semibold hover:bg-[var(--primary)] hover:text-white transition-all flex items-center justify-center gap-2">
+                        <span>تماس با من</span>
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="animate-on-scroll animate-delay-400 flex justify-center gap-6 pt-8">
+                    <a href="#" class="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--primary)] hover:text-white transition-all" aria-label="GitHub">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--primary)] hover:text-white transition-all" aria-label="LinkedIn">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--primary)] hover:text-white transition-all" aria-label="Twitter">
+                        <i data-lucide="twitter" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--primary)] hover:text-white transition-all" aria-label="Email">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-[var(--text-muted)]" aria-label="اسکرول به پایین">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-[var(--surface)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="animate-on-scroll text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">درباره من</span>
+                </h2>
+                <p class="animate-on-scroll animate-delay-100 text-[var(--text-muted)] max-w-2xl mx-auto">
+                    آشنایی با مسیر حرفه‌ای، دیدگاه‌ها و فلسفه کاری من
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Image/Visual -->
+                <div class="animate-on-scroll">
+                    <div class="relative">
+                        <div class="absolute inset-0 gradient-bg rounded-3xl transform rotate-3 opacity-20"></div>
+                        <div class="relative bg-[var(--bg)] rounded-3xl p-8 shadow-xl">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-[var(--surface)] rounded-2xl p-6 text-center card-hover">
+                                    <span class="text-4xl font-bold gradient-text">۸+</span>
+                                    <p class="text-sm text-[var(--text-muted)] mt-2">سال تجربه</p>
+                                </div>
+                                <div class="bg-[var(--surface)] rounded-2xl p-6 text-center card-hover">
+                                    <span class="text-4xl font-bold gradient-text">۵۰+</span>
+                                    <p class="text-sm text-[var(--text-muted)] mt-2">پروژه موفق</p>
+                                </div>
+                                <div class="bg-[var(--surface)] rounded-2xl p-6 text-center card-hover">
+                                    <span class="text-4xl font-bold gradient-text">۳۰+</span>
+                                    <p class="text-sm text-[var(--text-muted)] mt-2">مشتری راضی</p>
+                                </div>
+                                <div class="bg-[var(--surface)] rounded-2xl p-6 text-center card-hover">
+                                    <span class="text-4xl font-bold gradient-text">۱۵+</span>
+                                    <p class="text-sm text-[var(--text-muted)] mt-2">جایزه و افتخار</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Content -->
+                <div class="space-y-6">
+                    <h3 class="animate-on-scroll text-2xl font-bold">توسعه‌دهنده‌ای با اشتیاق به نوآوری</h3>
+                    
+                    <p class="animate-on-scroll animate-delay-100 text-[var(--text-muted)] leading-relaxed">
+                        من علی محمدی هستم، یک توسعه‌دهنده ارشد فرانت‌اند با بیش از ۸ سال تجربه در طراحی و 
+                        پیاده‌سازی اپلیکیشن‌های وب پیشرفته. تخصص اصلی من در فریم‌ورک‌های مدرن جاوااسکریپت، 
+                        به‌ویژه React و Next.js است.
+                    </p>
+                    
+                    <p class="animate-on-scroll animate-delay-200 text-[var(--text-muted)] leading-relaxed">
+                        فلسفه کاری من بر سه اصل استوار است: کیفیت بدون سازش، توجه به جزئیات، و تعهد به 
+                        یادگیری مداوم. باور دارم که کد تمیز و معماری درست، پایه‌های اصلی هر محصول موفق هستند.
+                    </p>
+                    
+                    <p class="animate-on-scroll animate-delay-300 text-[var(--text-muted)] leading-relaxed">
+                        در طول مسیر حرفه‌ای خود با استارتاپ‌های نوپا تا شرکت‌های بزرگ همکاری کرده‌ام و 
+                        این تجربه متنوع، دیدگاه جامعی از نیازهای مختلف کسب‌وکارها به من داده است.
+                    </p>
+                    
+                    <div class="animate-on-scroll animate-delay-400 flex flex-wrap gap-4 pt-4">
+                        <div class="flex items-center gap-2 text-[var(--primary)]">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            <span>معماری مقیاس‌پذیر</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--primary)]">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            <span>بهینه‌سازی عملکرد</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--primary)]">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            <span>طراحی واکنش‌گرا</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--primary)]">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            <span>دسترسی‌پذیری</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="animate-on-scroll text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">مهارت‌ها و تخصص‌ها</span>
+                </h2>
+                <p class="animate-on-scroll animate-delay-100 text-[var(--text-muted)] max-w-2xl mx-auto">
+                    فناوری‌ها و ابزارهایی که در پروژه‌های خود استفاده می‌کنم
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend -->
+                <div class="animate-on-scroll bg-[var(--surface)] rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="code-2" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">فرانت‌اند</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">React / Next.js</span>
+                                <span class="text-sm text-[var(--primary)]">۹۵٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">TypeScript</span>
+                                <span class="text-sm text-[var(--primary)]">۹۰٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Tailwind CSS</span>
+                                <span class="text-sm text-[var(--primary)]">۹۲٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend -->
+                <div class="animate-on-scroll animate-delay-100 bg-[var(--surface)] rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="server" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">بک‌اند</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Node.js</span>
+                                <span class="text-sm text-[var(--primary)]">۸۵٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">PostgreSQL</span>
+                                <span class="text-sm text-[var(--primary)]">۸۰٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">GraphQL</span>
+                                <span class="text-sm text-[var(--primary)]">۷۵٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tools & DevOps -->
+                <div class="animate-on-scroll animate-delay-200 bg-[var(--surface)] rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="wrench" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">ابزارها و DevOps</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Git / GitHub</span>
+                                <span class="text-sm text-[var(--primary)]">۹۰٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Docker</span>
+                                <span class="text-sm text-[var(--primary)]">۷۵٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">CI/CD</span>
+                                <span class="text-sm text-[var(--primary)]">۸۰٪</span>
+                            </div>
+                            <div class="h-2 bg-[var(--bg)] rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design -->
+                <div class="animate-on-scroll animate-delay-300 bg-[var(--surface)] rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="palette" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">طراحی</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">Figma</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">Adobe XD</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">UI/UX</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">Design Systems</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">Prototyping</span>
+                    </div>
+                </div>
+                
+                <!-- Animation -->
+                <div class="animate-on-scroll animate-delay-400 bg-[var(--surface)] rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="sparkles" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">انیمیشن و تعامل</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">Framer Motion</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">GSAP</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">Lottie</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">CSS Animations</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">Three.js</span>
+                    </div>
+                </div>
+                
+                <!-- Soft Skills -->
+                <div class="animate-on-scroll animate-delay-400 bg-[var(--surface)] rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">مهارت‌های نرم</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">رهبری تیم</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">مدیریت پروژه</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">ارتباط موثر</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">حل مسئله</span>
+                        <span class="px-4 py-2 bg-[var(--bg)] rounded-full text-sm">منتورینگ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-[var(--surface)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="animate-on-scroll text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">نمونه‌کارها</span>
+                </h2>
+                <p class="animate-on-scroll animate-delay-100 text-[var(--text-muted)] max-w-2xl mx-auto">
+                    برخی از پروژه‌های شاخص که در آن‌ها نقش کلیدی داشته‌ام
+                </p>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="animate-on-scroll group bg-[var(--bg)] rounded-2xl overflow-hidden card-hover">
+                    <div class="relative h-64 gradient-bg opacity-80 flex items-center justify-center">
+                        <i data-lucide="shopping-cart" class="w-24 h-24 text-white opacity-50"></i>
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">پلتفرم تجارت الکترونیک هوشمند</h3>
+                        <p class="text-[var(--text-muted)] mb-4 leading-relaxed">
+                            طراحی و توسعه یک فروشگاه آنلاین مقیاس‌پذیر با قابلیت‌های پیشرفته مانند 
+                            جستجوی هوشمند، سیستم توصیه‌گر و پرداخت امن.
+                        </p>
+                        <div class="mb-4">
+                            <p class="text-sm text-[var(--primary)] mb-2">نقش: توسعه‌دهنده ارشد فرانت‌اند</p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>چالش:</strong> بهینه‌سازی عملکرد برای نمایش هزاران محصول
+                            </p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>نتیجه:</strong> افزایش ۴۰٪ نرخ تبدیل و کاهش ۶۰٪ زمان بارگذاری
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">Next.js</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">TypeScript</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">GraphQL</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">Redis</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="animate-on-scroll animate-delay-100 group bg-[var(--bg)] rounded-2xl overflow-hidden card-hover">
+                    <div class="relative h-64 bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                        <i data-lucide="bar-chart-3" class="w-24 h-24 text-white opacity-50"></i>
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">داشبورد تحلیل داده سازمانی</h3>
+                        <p class="text-[var(--text-muted)] mb-4 leading-relaxed">
+                            پلتفرم یکپارچه برای تجسم و تحلیل داده‌های کسب‌وکار با نمودارهای 
+                            تعاملی و گزارش‌های قابل سفارشی‌سازی.
+                        </p>
+                        <div class="mb-4">
+                            <p class="text-sm text-[var(--primary)] mb-2">نقش: معمار فرانت‌اند و لید فنی</p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>چالش:</strong> پردازش و نمایش داده‌های حجیم در لحظه
+                            </p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>نتیجه:</strong> کاهش ۷۰٪ زمان تصمیم‌گیری مدیران
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">React</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">D3.js</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">WebSocket</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="animate-on-scroll animate-delay-200 group bg-[var(--bg)] rounded-2xl overflow-hidden card-hover">
+                    <div class="relative h-64 bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center">
+                        <i data-lucide="video" class="w-24 h-24 text-white opacity-50"></i>
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">پلتفرم آموزش آنلاین</h3>
+                        <p class="text-[var(--text-muted)] mb-4 leading-relaxed">
+                            سامانه آموزش الکترونیکی با قابلیت پخش ویدئو، آزمون آنلاین، 
+                            صدور گواهینامه و تعامل زنده بین استاد و دانشجو.
+                        </p>
+                        <div class="mb-4">
+                            <p class="text-sm text-[var(--primary)] mb-2">نقش: توسعه‌دهنده فول‌استک</p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>چالش:</strong> پشتیبانی از هزاران کاربر همزمان
+                            </p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>نتیجه:</strong> بیش از ۵۰,۰۰۰ کاربر فعال ماهانه
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">Next.js</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">AWS</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">PostgreSQL</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">WebRTC</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="animate-on-scroll animate-delay-300 group bg-[var(--bg)] rounded-2xl overflow-hidden card-hover">
+                    <div class="relative h-64 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i data-lucide="smartphone" class="w-24 h-24 text-white opacity-50"></i>
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="p-3 bg-white rounded-full text-[var(--bg-dark)] hover:scale-110 transition-transform">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">اپلیکیشن بانکداری دیجیتال</h3>
+                        <p class="text-[var(--text-muted)] mb-4 leading-relaxed">
+                            طراحی رابط کاربری و توسعه اپلیکیشن وب بانکداری با امکانات کامل 
+                            شامل انتقال وجه، پرداخت قبوض و مدیریت حساب.
+                        </p>
+                        <div class="mb-4">
+                            <p class="text-sm text-[var(--primary)] mb-2">نقش: لید فرانت‌اند</p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>چالش:</strong> امنیت بالا و تجربه کاربری ساده
+                            </p>
+                            <p class="text-sm text-[var(--text-muted)]">
+                                <strong>نتیجه:</strong> امتیاز ۴.۸ از ۵ در نظرسنجی کاربران
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">React Native</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">TypeScript</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">Redux</span>
+                            <span class="px-3 py-1 bg-[var(--surface)] rounded-full text-xs">Biometric</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View More -->
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 text-[var(--primary)] font-semibold hover:underline">
+                    <span>مشاهده همه پروژه‌ها</span>
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="animate-on-scroll text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">رزومه و تجربیات</span>
+                </h2>
+                <p class="animate-on-scroll animate-delay-100 text-[var(--text-muted)] max-w-2xl mx-auto">
+                    مسیر حرفه‌ای و سوابق تحصیلی من
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Work Experience -->
+                <div>
+                    <h3 class="animate-on-scroll text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-[var(--primary)]"></i>
+                        <span>تجربیات کاری</span>
+                    </h3>
+                    
+                    <div class="space-y-8 relative">
+                        <!-- Timeline Line -->
+                        <div class="absolute right-2 top-2 bottom-0 w-0.5 bg-gradient-to-b from-[var(--primary)] to-transparent"></div>
+                        
+                        <!-- Experience 1 -->
+                        <div class="animate-on-scroll relative pr-10">
+                            <div class="absolute right-0 top-2 w-4 h-4 rounded-full gradient-bg"></div>
+                            <div class="bg-[var(--surface)] rounded-xl p-6 card-hover">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="font-bold">توسعه‌دهنده ارشد فرانت‌اند</h4>
+                                    <span class="text-sm text-[var(--primary)]">۱۴۰۰ - اکنون</span>
+                                </div>
+                                <p class="text-[var(--text-muted)] text-sm mb-3">شرکت فناوری اطلاعات آریا</p>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                    رهبری تیم فرانت‌اند ۸ نفره، طراحی معماری سیستم‌های پیچیده، 
+                                    و پیاده‌سازی استانداردهای کدنویسی در سطح سازمان.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience 2 -->
+                        <div class="animate-on-scroll animate-delay-100 relative pr-10">
+                            <div class="absolute right-0 top-2 w-4 h-4 rounded-full gradient-bg"></div>
+                            <div class="bg-[var(--surface)] rounded-xl p-6 card-hover">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="font-bold">توسعه‌دهنده فرانت‌اند</h4>
+                                    <span class="text-sm text-[var(--primary)]">۱۳۹۷ - ۱۴۰۰</span>
+                                </div>
+                                <p class="text-[var(--text-muted)] text-sm mb-3">استارتاپ دیجی‌پی</p>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                    توسعه و نگهداری اپلیکیشن‌های وب با React، بهینه‌سازی عملکرد 
+                                    و همکاری نزدیک با تیم طراحی و محصول.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience 3 -->
+                        <div class="animate-on-scroll animate-delay-200 relative pr-10">
+                            <div class="absolute right-0 top-2 w-4 h-4 rounded-full gradient-bg"></div>
+                            <div class="bg-[var(--surface)] rounded-xl p-6 card-hover">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="font-bold">توسعه‌دهنده جونیور</h4>
+                                    <span class="text-sm text-[var(--primary)]">۱۳۹۵ - ۱۳۹۷</span>
+                                </div>
+                                <p class="text-[var(--text-muted)] text-sm mb-3">شرکت نرم‌افزاری پارس</p>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                    یادگیری و پیاده‌سازی فناوری‌های وب مدرن، مشارکت در پروژه‌های 
+                                    تیمی و توسعه مهارت‌های حرفه‌ای.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Education -->
+                <div>
+                    <h3 class="animate-on-scroll text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="graduation-cap" class="w-6 h-6 text-[var(--primary)]"></i>
+                        <span>تحصیلات و گواهینامه‌ها</span>
+                    </h3>
+                    
+                    <div class="space-y-8 relative">
+                        <!-- Timeline Line -->
+                        <div class="absolute right-2 top-2 bottom-0 w-0.5 bg-gradient-to-b from-[var(--primary)] to-transparent"></div>
+                        
+                        <!-- Education 1 -->
+                        <div class="animate-on-scroll relative pr-10">
+                            <div class="absolute right-0 top-2 w-4 h-4 rounded-full gradient-bg"></div>
+                            <div class="bg-[var(--surface)] rounded-xl p-6 card-hover">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="font-bold">کارشناسی ارشد مهندسی نرم‌افزار</h4>
+                                    <span class="text-sm text-[var(--primary)]">۱۳۹۵</span>
+                                </div>
+                                <p class="text-[var(--text-muted)] text-sm mb-3">دانشگاه صنعتی شریف</p>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                    تمرکز بر معماری نرم‌افزار و سیستم‌های توزیع‌شده
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Education 2 -->
+                        <div class="animate-on-scroll animate-delay-100 relative pr-10">
+                            <div class="absolute right-0 top-2 w-4 h-4 rounded-full gradient-bg"></div>
+                            <div class="bg-[var(--surface)] rounded-xl p-6 card-hover">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="font-bold">کارشناسی مهندسی کامپیوتر</h4>
+                                    <span class="text-sm text-[var(--primary)]">۱۳۹۳</span>
+                                </div>
+                                <p class="text-[var(--text-muted)] text-sm mb-3">دانشگاه تهران</p>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                    معدل ۱۸.۵ - رتبه اول دانشکده
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Certifications -->
+                        <div class="animate-on-scroll animate-delay-200 relative pr-10">
+                            <div class="absolute right-0 top-2 w-4 h-4 rounded-full gradient-bg"></div>
+                            <div class="bg-[var(--surface)] rounded-xl p-6 card-hover">
+                                <h4 class="font-bold mb-4">گواهینامه‌های حرفه‌ای</h4>
+                                <ul class="space-y-2 text-sm text-[var(--text-muted)]">
+                                    <li class="flex items-center gap-2">
+                                        <i data-lucide="award" class="w-4 h-4 text-[var(--primary)]"></i>
+                                        <span>AWS Certified Solutions Architect</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <i data-lucide="award" class="w-4 h-4 text-[var(--primary)]"></i>
+                                        <span>Google Professional Cloud Developer</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <i data-lucide="award" class="w-4 h-4 text-[var(--primary)]"></i>
+                                        <span>Meta Frontend Developer Certificate</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Download Resume Button -->
+            <div class="text-center mt-16">
+                <a href="#" class="btn-primary inline-flex items-center gap-3 px-8 py-4 rounded-xl text-white font-semibold">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    <span>دانلود رزومه کامل</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-[var(--surface)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="animate-on-scroll text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">نظرات همکاران</span>
+                </h2>
+                <p class="animate-on-scroll animate-delay-100 text-[var(--text-muted)] max-w-2xl mx-auto">
+                    بازخورد افرادی که با آن‌ها همکاری داشته‌ام
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="animate-on-scroll bg-[var(--bg)] rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                    </div>
+                    <p class="text-[var(--text-muted)] mb-6 leading-relaxed">
+                        «علی یکی از بهترین توسعه‌دهندگانی است که با او کار کرده‌ام. توجه او به جزئیات و 
+                        کیفیت کد واقعاً استثنایی است. توصیه می‌کنم.»
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-bold">
+                            م.ر
+                        </div>
+                        <div>
+                            <p class="font-bold">محمد رضایی</p>
+                            <p class="text-sm text-[var(--text-muted)]">مدیر فنی - شرکت آریا</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="animate-on-scroll animate-delay-100 bg-[var(--bg)] rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                    </div>
+                    <p class="text-[var(--text-muted)] mb-6 leading-relaxed">
+                        «همکاری با علی تجربه‌ای عالی بود. او نه تنها مهارت‌های فنی بالایی دارد، 
+                        بلکه توانایی حل مسائل پیچیده را به شکلی خلاقانه داراست.»
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-bold">
+                            س.ک
+                        </div>
+                        <div>
+                            <p class="font-bold">سارا کریمی</p>
+                            <p class="text-sm text-[var(--text-muted)]">مدیر محصول - دیجی‌پی</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="animate-on-scroll animate-delay-200 bg-[var(--bg)] rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
+                    </div>
+                    <p class="text-[var(--text-muted)] mb-6 leading-relaxed">
+                        «علی تعهد بالایی به کیفیت دارد و همیشه بیش از انتظار تحویل می‌دهد. 
+                        مهارت‌های ارتباطی عالی او همکاری را بسیار ساده می‌کند.»
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-bold">
+                            ا.ح
+                        </div>
+                        <div>
+                            <p class="font-bold">احمد حسینی</p>
+                            <p class="text-sm text-[var(--text-muted)]">بنیان‌گذار - تک‌استارت</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="animate-on-scroll text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">تماس با من</span>
+                </h2>
+                <p class="animate-on-scroll animate-delay-100 text-[var(--text-muted)] max-w-2xl mx-auto">
+                    آماده همکاری در پروژه‌های جذاب هستم. با من در تماس باشید.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="animate-on-scroll">
+                        <h3 class="text-2xl font-bold mb-6">بیایید با هم صحبت کنیم</h3>
+                        <p class="text-[var(--text-muted)] leading-relaxed mb-8">
+                            اگر پروژه‌ای در ذهن دارید یا به دنبال همکاری با یک توسعه‌دهنده با تجربه هستید، 
+                            خوشحال می‌شوم که درباره آن صحبت کنیم. فرم را پر کنید یا مستقیماً تماس بگیرید.
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="animate-on-scroll animate-delay-100 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-[var(--surface)] flex items-center justify-center">
+                                <i data-lucide="mail" class="w-6 h-6 text-[var(--primary)]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-[var(--text-muted)]">ایمیل</p>
+                                <a href="mailto:ali@example.com" class="font-medium hover:text-[var(--primary)]">ali@example.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="animate-on-scroll animate-delay-200 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-[var(--surface)] flex items-center justify-center">
+                                <i data-lucide="phone" class="w-6 h-6 text-[var(--primary)]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-[var(--text-muted)]">تلفن</p>
+                                <a href="tel:+989123456789" class="font-medium hover:text-[var(--primary)]">۰۹۱۲-۳۴۵-۶۷۸۹</a>
+                            </div>
+                        </div>
+                        
+                        <div class="animate-on-scroll animate-delay-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-[var(--surface)] flex items-center justify-center">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-[var(--primary)]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-[var(--text-muted)]">موقعیت</p>
+                                <p class="font-medium">تهران، ایران</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="animate-on-scroll animate-delay-400">
+                        <p class="text-sm text-[var(--text-muted)] mb-4">من را در شبکه‌های اجتماعی دنبال کنید:</p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center hover:bg-[var(--primary)] hover:text-white transition-all">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center hover:bg-[var(--primary)] hover:text-white transition-all">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center hover:bg-[var(--primary)] hover:text-white transition-all">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center hover:bg-[var(--primary)] hover:text-white transition-all">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="animate-on-scroll">
+                    <form id="contact-form" class="bg-[var(--surface)] rounded-2xl p-8 space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-2">نام کامل</label>
+                                <input type="text" id="name" name="name" required 
+                                    class="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-transparent focus:border-[var(--primary)] focus:outline-none transition-colors"
+                                    placeholder="نام خود را وارد کنید">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">ایمیل</label>
+                                <input type="email" id="email" name="email" required 
+                                    class="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-transparent focus:border-[var(--primary)] focus:outline-none transition-colors"
+                                    placeholder="ایمیل خود را وارد کنید">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium mb-2">موضوع</label>
+                            <input type="text" id="subject" name="subject" required 
+                                class="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-transparent focus:border-[var(--primary)] focus:outline-none transition-colors"
+                                placeholder="موضوع پیام را وارد کنید">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-2">پیام</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                class="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-transparent focus:border-[var(--primary)] focus:outline-none transition-colors resize-none"
+                                placeholder="پیام خود را بنویسید..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-primary py-4 rounded-xl text-white font-semibold flex items-center justify-center gap-2">
+                            <span>ارسال پیام</span>
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-[var(--surface)] border-t border-[var(--bg)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-right">
+                    <a href="#hero" class="text-2xl font-bold gradient-text">علی.م</a>
+                    <p class="text-sm text-[var(--text-muted)] mt-2">توسعه‌دهنده ارشد فرانت‌اند</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6 text-sm">
+                    <a href="#about" class="hover:text-[var(--primary)] transition-colors">درباره من</a>
+                    <a href="#skills" class="hover:text-[var(--primary)] transition-colors">مهارت‌ها</a>
+                    <a href="#projects" class="hover:text-[var(--primary)] transition-colors">نمونه‌کارها</a>
+                    <a href="#resume" class="hover:text-[var(--primary)] transition-colors">رزومه</a>
+                    <a href="#contact" class="hover:text-[var(--primary)] transition-colors">تماس</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <a href="#" class="p-2 rounded-lg hover:bg-[var(--bg)] transition-colors" aria-label="GitHub">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="p-2 rounded-lg hover:bg-[var(--bg)] transition-colors" aria-label="LinkedIn">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="p-2 rounded-lg hover:bg-[var(--bg)] transition-colors" aria-label="Twitter">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-[var(--bg)] text-center">
+                <p class="text-sm text-[var(--text-muted)]">
+                    © ۱۴۰۳ تمامی حقوق محفوظ است. طراحی و توسعه با ❤️ توسط علی محمدی
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 left-8 w-12 h-12 rounded-full gradient-bg text-white shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110 z-50" aria-label="بازگشت به بالا">
+        <i data-lucide="chevron-up" class="w-6 h-6 mx-auto"></i>
+    </button>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Theme Management
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+        
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.remove('theme-light');
+                body.classList.add('theme-dark');
+                document.querySelector('.dark-icon').classList.remove('hidden');
+                document.querySelector('.light-icon').classList.add('hidden');
+            } else {
+                body.classList.remove('theme-dark');
+                body.classList.add('theme-light');
+                document.querySelector('.dark-icon').classList.add('hidden');
+                document.querySelector('.light-icon').classList.remove('hidden');
+            }
+            localStorage.setItem('theme', theme);
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.classList.contains('theme-dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+        
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking links
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Navbar Background on Scroll
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('glass-effect', 'shadow-lg');
+            } else {
+                navbar.classList.remove('glass-effect', 'shadow-lg');
+            }
+        });
+        
+        // Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill bars
+                    const skillBars = entry.target.querySelectorAll('.skill-bar');
+                    skillBars.forEach(bar => {
+                        const width = bar.dataset.width;
+                        bar.style.width = width;
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Active Navigation Link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            const button = contactForm.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span>در حال ارسال...</span>';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = '<span>پیام با موفقیت ارسال شد!</span><i data-lucide="check" class="w-5 h-5"></i>';
+                button.classList.add('bg-green-500');
+                lucide.createIcons();
+                
+                // Reset form
+                contactForm.reset();
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    button.classList.remove('bg-green-500');
+                    lucide.createIcons();
+                }, 3000);
+            }, 1500);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Reduced motion check
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        
+        if (prefersReducedMotion.matches) {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
